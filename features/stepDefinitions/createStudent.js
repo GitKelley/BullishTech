@@ -8,7 +8,7 @@ const base_url = "http://localhost:9080"
 const endpoint = "/studentmgmt/addStudent"
 
 When('I send a POST request to {string}', function (string) {
-    const response = await axios.post(base_url + endpoint, data,
+    this.response = await axios.post(base_url + endpoint, data,
         {
             headers: header,
         }
@@ -18,7 +18,7 @@ When('I send a POST request to {string}', function (string) {
 
 
 Then('I get a {int} response code, and a student is created', function (int) {
-    chai.expect(response)
+    chai.expect(this.response)
 });
 
 When('I send a POST request without auth to {string}', function (string) {
