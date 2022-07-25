@@ -2,14 +2,17 @@
     "name": "bullish_tech_challenge",
     "version": "1.0.0",
     "scripts": {
-        "api_test": "mocha studentmanagement.test.js"
+        "api_tests": "npx cucumber-js api_tests/features -f summary -f json:report/cucumber_report.json",
+        "ui_tests": "node ./node_modules/selenium-cucumber-js/index.js -s ./step-definitions"
     },
     "dependencies": {
-        "axios": "^0.27.2",
-        "chai": "^4.3.6"
+        "chai": "^4.3.6",
+        "chai-http": "^4.3.0",
+        "js-yaml": "^4.1.0",
+        "selenium-cucumber-js": "^1.8.1"
     },
     "devDependencies": {
-        "cucumber": "^6.0.7",
-        "pactum": "^3.1.13"
+        "@cucumber/cucumber": "^8.5.0",
+        "cucumber-html-reporter": "^5.5.0"
     }
 }

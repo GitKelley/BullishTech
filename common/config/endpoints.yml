@@ -1,0 +1,6 @@
+endpoints:
+  # Studentmgmnt Endpoints
+  create_student: '/studentmgmt/addStudent'
+  delete_student: '/studentmgmt/deleteStudent'
+  get_student: '/studentmgmt/fetchStudents'
+  update_student: '/studentmgmt/updateStudent'
