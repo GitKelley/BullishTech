@@ -28,7 +28,7 @@ npm run all_tests
 ```
 When docker is working, it will look something like this
 ```shell
-docker run -it bcc:v1   
+docker run -it bullishTech:<version>
 ```
 
 #### Running without a container
