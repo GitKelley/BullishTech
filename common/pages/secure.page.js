@@ -1,7 +1,7 @@
 import Page from './page';
 
 /**
- * sub page containing specific selectors and methods for a specific page
+ * sub page containing specific selectors and methods for the secure page
  */
 class SecurePage extends Page {
     /**

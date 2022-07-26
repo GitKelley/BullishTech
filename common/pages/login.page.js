@@ -1,7 +1,7 @@
 import Page from './page';
 
 /**
- * sub page containing specific selectors and methods for a specific page
+ * sub page containing specific selectors and methods for the login page
  */
 class LoginPage extends Page {
     /**
@@ -20,8 +20,7 @@ class LoginPage extends Page {
     }
 
     /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
+     * a method used to log in to the web app
      */
     async login (username, password) {
         await this.inputUsername.setValue(username);

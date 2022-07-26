@@ -1,9 +1,8 @@
 const { expect } = require('chai');
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 
 const ConfigHelper = require('../../../../common/configure')
 const StudentManagement = require('../../../../common/apis/studentManagement')
-const studentData = require('../../../../data/students/studentData');
 
 let configHelper = new ConfigHelper();
 const config = configHelper.accessConfig()

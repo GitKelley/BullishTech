@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 
 const ConfigHelper = require('../../../../common/configure')
 const StudentManagement = require('../../../../common/apis/studentManagement')
@@ -15,5 +15,6 @@ When(/^I send an UPDATE request with new (.*?) data$/, async (student) => {
 });
 
 Then(/^The (.*?) data should be reflected in the app$/, async (student) => {
-    await studentMgmnt.getStudent(config, this.id)
+    const getResponse = await studentMgmnt.getStudent(config, this.id)
+    expect(getResponse.body).to.deep.equal(student)
 });

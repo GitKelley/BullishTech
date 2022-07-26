@@ -1,3 +1,5 @@
+# This yaml file is used for storing relevant endpoints
+
 endpoints:
   # Studentmgmnt Endpoints
   create_student: '/studentmgmt/addStudent'

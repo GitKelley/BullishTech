@@ -3,12 +3,6 @@ import LandingPage from '../../../../common/pages/landing.page';
 import LoginPage from '../../../../common/pages/login.page';
 import SecurePage from '../../../../common/pages/secure.page';
 
-const pages = {
-    landingPage: LandingPage,
-    loginPage: LoginPage,
-    securePage: SecurePage
-}
-
 Given(/^I am on the (\w+) page$/, async (page) => {
     await LandingPage.open()
     await LandingPage.formAuthenticationLink.click();

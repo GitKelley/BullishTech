@@ -2,6 +2,12 @@ const yaml = require('js-yaml');
 const fs = require('fs')
 const path = require('path')
 
+/**
+ * This class is used to configure the environment
+ * based on the values stored in config/endpoints.yml and
+ * config/env/*.yml
+ */
+
 class ConfigHelper {
     getProjectRoot(){
         return path.resolve("./");
@@ -17,9 +23,9 @@ class ConfigHelper {
     }
     
     loadEnvConfigurations(env){
-        /* 
-        Hardcoding this to local for now, could generate a separate file on
-        the fly during runtime that contains vars passed into run command
+        /**
+        * Hardcoding this to local for now, could generate a separate file on
+        * the fly during runtime that contains vars passed into run command
         */
        let config
         if (env){
@@ -31,9 +37,9 @@ class ConfigHelper {
     }
     
     accessConfig(){
-        /*
-        Access the configuration dictionary
-        :return: Dictionary of configuration options
+        /**
+        * Access the configuration dictionary
+        * :return: Dictionary of configuration options
         */
         const envConnfig = this.loadEnvConfigurations('local')
         const coreConfig = this.loadCommonConfigurations()

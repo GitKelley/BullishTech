@@ -1,2 +1,7 @@
+# The purpose of this directory is to store all env specific files
+# Ex. Qa, Staging, Local (in this example)
+
+# This yaml file will contain all data relative to the env
+# Ex. other app URLs, database names etc
 env:
   base_url: "http://localhost:9080"

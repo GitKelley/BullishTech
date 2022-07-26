@@ -1,4 +1,3 @@
-const assert = require('assert')
 const chai = require('chai')
     , chaiHttp = require('chai-http')
 chai.use(chaiHttp)
