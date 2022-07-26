@@ -5,5 +5,5 @@ Feature: Updating a student
     Then The <updated> data should be reflected in the app
 
     Examples: 
-      | student                                                                                                          | updated                                                                                                          |
-      | {"id": 1,"firstName": "NewFName","lastName": "NewLName","studentClass": "English 101","nationality": "Canadian"} | {"id": 1,"firstName": "NewFName","lastName": "NewLName","studentClass": "English 101","nationality": "Canadian"} |
+      | student                                 | updated                                 |
+      | {"id": 1,"studentClass": "English 101"} | {"id": 1,"studentClass": "English 101"} |

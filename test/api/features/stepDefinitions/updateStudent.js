@@ -16,5 +16,5 @@ When(/^I send an UPDATE request with new (.*?) data$/, async (student) => {
 
 Then(/^The (.*?) data should be reflected in the app$/, async (student) => {
     const getResponse = await studentMgmnt.getStudent(config, this.id);
-    expect(getResponse.body).to.deep.equal(student);
+    expect(getResponse.body.studentClass).to.equal(student.studentClass);
 });
