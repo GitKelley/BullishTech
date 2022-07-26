@@ -1,11 +1,25 @@
-const assert = require('assert');
-const loginPage = require('common/pages/loginPage.js')
+import { Given, When, Then } from '@wdio/cucumber-framework';
+import LandingPage from '../../../../common/pages/landing.page';
+import LoginPage from '../../../../common/pages/login.page';
+import SecurePage from '../../../../common/pages/secure.page';
 
-module.exports = async () => {
-    this.Given("I access the login page", async() => {
-        helpers.loadPage(loginPage.url)
-    })
-    this.When("I try to login with valid credentials", async() => {
-        loginPage.login(shared.testData.username, shared.testData.password)
-    })
+const pages = {
+    landingPage: LandingPage,
+    loginPage: LoginPage,
+    securePage: SecurePage
 }
+
+Given(/^I am on the (\w+) page$/, async (page) => {
+    await LandingPage.open()
+    await LandingPage.formAuthenticationLink.click();
+});
+
+When(/^I login with (\w+) and (.+)$/, async (username, password) => {
+    await LoginPage.login(username, password)
+});
+
+Then(/^I should see a flash message saying (.*)$/, async (message) => {
+    await expect(SecurePage.flashAlert).toBeExisting();
+    await expect(SecurePage.flashAlert).toHaveTextContaining(message);
+});
+

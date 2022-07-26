@@ -2,17 +2,29 @@
     "name": "bullish_tech_challenge",
     "version": "1.0.0",
     "scripts": {
-        "api_tests": "npx cucumber-js api_tests/features -f summary -f json:report/cucumber_report.json",
-        "ui_tests": "node ./node_modules/selenium-cucumber-js/index.js -s ./step-definitions"
+        "api_tests": "npx cucumber-js test/api/features -f html:reports/cucumber_report_api.html",
+        "ui_tests": "./node_modules/.bin/wdio ./wdio.conf.js"
     },
     "dependencies": {
+        "@wdio/cli": "^7.20.7",
         "chai": "^4.3.6",
         "chai-http": "^4.3.0",
         "js-yaml": "^4.1.0",
-        "selenium-cucumber-js": "^1.8.1"
+        "selenium-webdriver": "^4.3.1",
+        "webdriverio": "^7.20.7"
     },
     "devDependencies": {
+        "@babel/core": "^7.18.9",
+        "@babel/preset-env": "^7.18.9",
+        "@babel/register": "^7.18.9",
         "@cucumber/cucumber": "^8.5.0",
-        "cucumber-html-reporter": "^5.5.0"
+        "@wdio/cucumber-framework": "^7.20.7",
+        "@wdio/local-runner": "^7.20.7",
+        "@wdio/selenium-standalone-service": "^7.20.7",
+        "@wdio/spec-reporter": "^7.20.7",
+        "chromedriver": "^103.0.0",
+        "cucumber-html-reporter": "^5.5.0",
+        "wdio-chromedriver-service": "^7.3.2",
+        "wdio-html-nice-reporter": "^8.0.3-beta2"
     }
 }

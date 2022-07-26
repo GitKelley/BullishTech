@@ -12,67 +12,48 @@ let studentMgmnt = new StudentManagement(config)
 
 let id;
 
-When('I try to create a student', async () => {
-    const response = await studentMgmnt.createStudent(config, studentData.studentOne)
+When(/^I try to create a (.*)$/, async (student) => {
+    const response = await studentMgmnt.createStudent(config, student)
     id = response.text.replace( /^\D+/g, '')
 });
 
 Then('A student is successfully created', async () => {
-    this.getResponse = await studentMgmnt.getStudent(config, parseInt(id))
-    expect(this.getResponse.body[0]).to.deep.equal(studentData.studentOne)
+    const getResponse = await studentMgmnt.getStudent(config, id)
+    expect(getResponse.statusCode).to.equal(200)
 });
 
-Given('a student that already exists', async () => {
-    dupeStudent = this.getResponse.body[0]
+When(/^I create a new student with the existing (.*) data$/, async (student) => {
+    this.existingResponse = await studentMgmnt.createStudent(config, student)
 });
 
-// This will fail with a 500 instead of a 400
-When('I try to create a new student with the existing student\'s data', async () => {
-    this.response = await studentMgmnt.createStudent(config, studentData.studentOne)
-    expect(this.response.statusCode).to.equal(500)
+Then(/^I should see a (.*?) status code$/, async (statusCode) => {
+    expect(this.existingResponse.statusCode).to.equal(parseInt(statusCode))
 });
 
-Then('The application alerts me the student already exists', async () => {
-    expect(this.response.text).to.equal(`Exception occurred while adding new student: Student already exists with student id: ${dupeStudent.id}`)
+Then(/^I should see a message saying (.*?)$/, async (message) => {
+    expect(this.existingResponse.text).to.equal(message)
 });
 
-// API doesn't check if lastName is missing, only firstName for some reason
-Given('a student with an invalid first name', async () => {
-    this.studentOneInvalidFName = {...studentData.studentOne}
-    this.studentOneInvalidFName.firstName = 999
-
-}); When('I try to create a student with the invalid first name', async () => {
-    this.badResponse = await studentMgmnt.createStudent(config, this.studentOneInvalidFName)
+When(/^I attempt to create a student with an invalid (.*)$/, async (student) => {
+    this.invalidStudentResponse = await studentMgmnt.createStudent(config, student)
 });
 
-// This also returns the incorrect status code
-Then('the student with the invalid first name is not created', async () => {
-    expect(this.badResponse.statusCode).to.equal(500)
+Then(/^The applications responds with a (.*?) status code$/, async (statusCode) => {
+    expect(this.invalidStudentResponse.statusCode).to.equal(parseInt(statusCode))
 });
 
-// This returns a duplicate student error message rather than 
-Then('the error message mentions first name being invalid', async () => {
-    expect(this.badResponse.text).to.equal('Exception occurred while adding new student: Required fields are missing: [First Name]')
+Then(/^The (.*?) should mention invalid data$/, async (message) => {
+    expect(this.invalidStudentResponse.text).to.equal(message)
 });
 
-// API doesn't check if lastName is missing, only firstName for some reason
-Given('a studen without a first name', async () => {
-    this.studentOneMissingFName = {...studentData.studentOne}
-    this.studentOneMissingFName.firstName = ''
+When(/^A student with missing (.*?) is sent$/, async (student) => {
+    this.invalidStudentResponse = await studentMgmnt.createStudent(config, student)
 });
 
-
-When('I try to create a student with the missing first name', async () => {
-    this.badResponse = await studentMgmnt.createStudent(config, this.studentOneMissingFName)
+Then(/^The response status code is (.*?)$/, async (statusCode) => {
+    expect(this.invalidStudentResponse.statusCode).to.equal(parseInt(statusCode))
 });
 
-// also returns 500 instead of 400
-Then('the student with the missing first name is not created', async () => {
-    expect(this.badResponse.statusCode).to.equal(500)
+Then(/^The (.*?) should mention missing data$/, async (message) => {
+    expect(this.invalidStudentResponse.text).to.equal(message)
 });
-
-
-Then('the error message mentions the first name missing', async () => {
-    expect(this.badResponse.text).to.equal('Exception occurred while adding new student: Required fields are missing: [First Name]')
-});
-

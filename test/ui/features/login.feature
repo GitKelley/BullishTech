@@ -1,14 +1,12 @@
-Feature: Login
-    In order to login to the application
-    As a test engineer
-    I need to submit login information
+Feature: The Internet Guinea Pig Website
 
-  Scenario: Login with valid information
-    Given I access the login page
-    When I try to login with valid credentials
-    Then I am successfully logged in
+  Scenario Outline: As a user, I can log into the secure area
 
-  Scenario: Login with invalid information
-    Given I access the login page
-    When I try to login with invalid credentials
-    Then I am not able to login
+    Given I am on the login page
+    When I login with <username> and <password>
+    Then I should see a flash message saying <message>
+
+    Examples:
+      | username | password             | message                        |
+      | tomsmith | SuperSecretPassword! | You logged into a secure area! |
+      | bob      | barker               | Your username is invalid!      |

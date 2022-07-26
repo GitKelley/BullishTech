@@ -11,6 +11,7 @@ class StudentManagement {
     async createStudent(config, studentDetails){
         const response = await chai.request(config['env']['base_url'])
             .post(this.config['endpoints']['create_student'])
+            .set('Content-Type', 'application/json')
             .send(studentDetails)
         return response;
     }
@@ -35,9 +36,9 @@ class StudentManagement {
     }
 
     async updateStudent(config, studentDetails) {
-        const response = await axios.put(config['env']['base_url'] + this.config['endpoints']['update_student'], studentDetails
-        )
-        assert.equal(response.status, 200)
+        const response = await chai.request(config['env']['base_url'])
+            .put(this.config['endpoints']['update_student'])
+            .send(studentDetails)
         return response;
     }
 }
