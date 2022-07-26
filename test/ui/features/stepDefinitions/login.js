@@ -4,12 +4,12 @@ import LoginPage from '../../../../common/pages/login.page';
 import SecurePage from '../../../../common/pages/secure.page';
 
 Given(/^I am on the (\w+) page$/, async (page) => {
-    await LandingPage.open()
+    await LandingPage.open();
     await LandingPage.formAuthenticationLink.click();
 });
 
 When(/^I login with (\w+) and (.+)$/, async (username, password) => {
-    await LoginPage.login(username, password)
+    await LoginPage.login(username, password);
 });
 
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
