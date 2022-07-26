@@ -12,9 +12,8 @@ let studentMgmnt = new StudentManagement(config)
 When(/^I send an UPDATE request with new (.*?) data$/, async (student) => {
     this.putResponse = await studentMgmnt.updateStudent(config, student)
     this.id = student.id
-    console.log(this.putResponse)
 });
 
 Then(/^The (.*?) data should be reflected in the app$/, async (student) => {
-    const getResponse = await studentMgmnt.getStudent(config, this.id)
+    await studentMgmnt.getStudent(config, this.id)
 });
